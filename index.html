@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERO — Luxury Fine Dining Restaurant</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        vero: {
+                            primary: '#D4AF37',
+                            dark: '#0B0B0B',
+                            card: '#161616',
+                            cardhover: '#1F1F1F',
+                            border: '#2A2A2A'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Lightbox CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0B0B0B; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        
+        body {
+            background-color: #0B0B0B;
+            color: #FFFFFF;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass-nav {
+            background: rgba(11, 11, 11, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(22, 22, 22, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF 0%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            transition: transform 0.15s ease-out, width 0.2s, height 0.2s;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #D4AF37;
+        }
+        #cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            margin-left: -16px;
+            margin-top: -16px;
+        }
+    </style>
+</head>
+<body class="bg-vero-dark text-white relative">
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 z-50 bg-vero-dark flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-7xl font-serif tracking-widest text-vero-primary mb-4 animate-pulse">VERO</h1>
+            <p class="text-xs uppercase tracking-[0.3em] text-gray-400">Luxury Fine Dining</p>
+            <div class="w-48 h-[2px] bg-gray-800 mx-auto mt-6 relative overflow-hidden">
+                <div id="loading-bar" class="absolute inset-y-0 left-0 bg-vero-primary w-0 transition-all duration-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-vero-primary z-[60] w-0 transition-all duration-100"></div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot" class="custom-cursor hidden md:block"></div>
+    <div id="cursor-ring" class="custom-cursor hidden md:block"></div>
+
+    <!-- Sticky Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center space-x-2 space-x-reverse">
+                    <span class="text-2xl md:text-3xl font-serif tracking-widest text-vero-primary font-bold">VERO</span>
+                </a>
+
+                <!-- Desktop Menu -->
+              <!-- Desktop Menu -->
+<div class="hidden lg:flex items-center text-sm font-medium tracking-wide" style="gap: 2rem;">
+    <a href="#home" class="text-vero-primary transition hover:text-vero-primary">Home</a>
+    <a href="#about" class="text-gray-300 hover:text-vero-primary transition">About</a>
+    <a href="#menu" class="text-gray-300 hover:text-vero-primary transition">Menu</a>
+    <a href="#gallery" class="text-gray-300 hover:text-vero-primary transition">Gallery</a>
+    <a href="#offers" class="text-gray-300 hover:text-vero-primary transition">Offers</a>
+    <a href="#chef" class="text-gray-300 hover:text-vero-primary transition">Chef</a>
+    <a href="#testimonials" class="text-gray-300 hover:text-vero-primary transition">Testimonials</a>
+    <a href="#contact" class="text-gray-300 hover:text-vero-primary transition">Contact</a>
+</div>
+
+                <!-- Right Actions -->
+                <div class="hidden md:flex items-center space-x-4 space-x-reverse">
+                    <button id="theme-toggle" class="w-10 h-10 rounded-full border border-vero-border flex items-center justify-center text-vero-primary hover:bg-vero-card transition">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <a href="#reservation" class="px-6 py-2.5 rounded-full bg-vero-primary text-black font-semibold text-sm hover:bg-opacity-90 transition shadow-lg shadow-vero-primary/20">
+                        Reserve Table
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center space-x-3 space-x-reverse lg:hidden">
+                    <button id="mobile-menu-btn" class="text-vero-primary text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-vero-dark/95 border-b border-vero-border backdrop-blur-xl px-6 py-6 space-y-4">
+            <a href="#home" class="block text-vero-primary font-medium">Home</a>
+            <a href="#about" class="block text-gray-300 font-medium">About</a>
+            <a href="#menu" class="block text-gray-300 font-medium">Menu</a>
+            <a href="#gallery" class="block text-gray-300 font-medium">Gallery</a>
+            <a href="#offers" class="block text-gray-300 font-medium">Offers</a>
+            <a href="#chef" class="block text-gray-300 font-medium">Chef</a>
+            <a href="#testimonials" class="block text-gray-300 font-medium">Testimonials</a>
+            <a href="#contact" class="block text-gray-300 font-medium">Contact</a>
+            <div class="pt-4 flex items-center justify-between border-t border-vero-border">
+                <button id="mobile-theme-toggle" class="text-vero-primary text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-moon"></i> Toggle Theme
+                </button>
+                <a href="#reservation" class="px-5 py-2 rounded-full bg-vero-primary text-black font-semibold text-xs">
+                    Reserve Table
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80" alt="VERO Restaurant Luxury Interior" class="w-full h-full object-cover scale-105 animate-pulse duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-vero-dark via-vero-dark/60 to-black/80"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 mt-16" data-aos="fade-up" data-aos-duration="1000">
+            <span class="text-vero-primary uppercase tracking-[0.4em] text-xs md:text-sm font-semibold mb-4 block">Fine Dining Experience</span>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif font-bold tracking-wide mb-6 leading-tight">
+                Where Culinary Art <br>Meets <span class="gold-gradient-text">Absolute Luxury</span>
+            </h1>
+            <p class="text-gray-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
+                Immerse your senses in world-class gastronomy curated by acclaimed executive chefs using the finest ingredients.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#reservation" class="w-full sm:w-auto px-8 py-4 rounded-full bg-vero-primary text-black font-bold tracking-wide hover:bg-opacity-90 transition shadow-xl shadow-vero-primary/30">
+                    Reserve Table
+                </a>
+                <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-full border border-vero-primary/50 text-vero-primary font-semibold tracking-wide hover:bg-vero-primary/10 transition">
+                    View Menu
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center animate-bounce">
+            <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-2">Scroll Down</span>
+            <div class="w-5 h-9 rounded-full border-2 border-vero-primary/40 flex items-start justify-center p-1">
+                <div class="w-1 h-2 bg-vero-primary rounded-full animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden bg-vero-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div data-aos="fade-right" data-aos-duration="1000" class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-vero-primary/20 to-transparent rounded-3xl blur-xl"></div>
+                    <div class="relative rounded-2xl overflow-hidden border border-vero-border glass-card">
+                        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80" alt="VERO Atmosphere" class="w-full h-[450px] object-cover hover:scale-105 transition duration-700">
+                    </div>
+                </div>
+                <div data-aos="fade-left" data-aos-duration="1000">
+                    <span class="text-vero-primary uppercase tracking-[0.3em] text-xs font-semibold mb-3 block">Our Heritage</span>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6">A Symphony of Flavors & Luxury Atmosphere</h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed font-light">
+                        Founded with a vision to redefine fine dining, VERO offers an exquisite fusion of modern culinary techniques and timeless tradition. Every dish is crafted as a masterpiece, designed to awaken your palate and create unforgettable memories.
+                    </p>
+                    <div class="grid grid-cols-3 gap-6 pt-4 border-t border-vero-border mb-8">
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-vero-primary mb-1">15+</h3>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider">Master Chefs</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-vero-primary mb-1">60+</h3>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider">Unique Dishes</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-vero-primary mb-1">100%</h3>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider">Fresh Ingredients</p>
+                        </div>
+                    </div>
+                    <a href="#reservation" class="inline-flex items-center gap-3 text-vero-primary font-semibold hover:gap-5 transition-all duration-300">
+                        <span>Book Your Experience</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 bg-[#0F0F0F] relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-vero-primary uppercase tracking-[0.3em] text-xs font-semibold mb-3 block">Gastronomy</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Our Exclusive Menu</h2>
+                <p class="text-gray-400 font-light">Explore our carefully curated selection of world-class dishes, meticulously prepared to perfection.</p>
+            </div>
+
+            <!-- Live Search & Filters -->
+            <div class="mb-12 flex flex-col md:flex-row items-center justify-between gap-6" data-aos="fade-up">
+                <!-- Search Bar -->
+                <div class="w-full md:w-96 relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                    <input type="text" id="menu-search" placeholder="Search dishes, categories, ingredients..." class="w-full pl-11 pr-4 py-3 rounded-full bg-vero-card border border-vero-border text-white text-sm focus:outline-none focus:border-vero-primary transition">
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-primary text-black font-semibold text-xs tracking-wider transition whitespace-nowrap active" data-category="all">All</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="breakfast">Breakfast</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="appetizers">Appetizers</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="salads">Salads</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="pizza">Pizza</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="pasta">Pasta</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="burgers">Burgers</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="grills">Grills</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="seafood">Seafood</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="desserts">Desserts</button>
+                    <button class="cat-filter px-5 py-2.5 rounded-full bg-vero-card border border-vero-border text-gray-300 hover:text-vero-primary font-medium text-xs tracking-wider transition whitespace-nowrap" data-category="drinks">Drinks</button>
+                </div>
+            </div>
+
+            <!-- Menu Grid Container -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- JavaScript will populate the 60+ items dynamically here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Offers Section -->
+    <section id="offers" class="py-24 bg-vero-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-vero-primary uppercase tracking-[0.3em] text-xs font-semibold mb-3 block">Special Experience</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Exclusive Luxury Offers</h2>
+                <p class="text-gray-400 font-light">Indulge in our limited-time seasonal packages crafted for distinguished guests.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Offer Card 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-vero-border relative group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-4 right-4 z-10 bg-vero-primary text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Limited Offer
+                    </div>
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=80" alt="Royal Grills Feast" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-vero-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold mb-2">Royal Grills Feast for Two</h3>
+                        <p class="text-gray-400 text-sm mb-6 font-light">Experience our signature mixed grill platter accompanied by appetizers, two fresh juices, and a luxury dessert selection.</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-400 block line-through">750 EGP</span>
+                                <span class="text-2xl font-bold text-vero-primary">580 EGP</span>
+                            </div>
+                            <a href="#reservation" class="px-6 py-3 rounded-full bg-vero-primary text-black font-semibold text-xs hover:bg-opacity-90 transition">
+                                Claim Offer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offer Card 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-vero-border relative group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-4 right-4 z-10 bg-vero-primary text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Chef's Choice
+                    </div>
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80" alt="Tomahawk Experience" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-vero-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold mb-2">Tomahawk Luxury Steak Night</h3>
+                        <p class="text-gray-400 text-sm mb-6 font-light">Premium 300g Black Angus ribeye steak paired with truffle parmesan fries, artisan wine, and signature lava cake.</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-400 block line-through">700 EGP</span>
+                                <span class="text-2xl font-bold text-vero-primary">550 EGP</span>
+                            </div>
+                            <a href="#reservation" class="px-6 py-3 rounded-full bg-vero-primary text-black font-semibold text-xs hover:bg-opacity-90 transition">
+                                Claim Offer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-[#0F0F0F] relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-vero-primary uppercase tracking-[0.3em] text-xs font-semibold mb-3 block">Visual Journey</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Atmosphere & Creations</h2>
+                <p class="text-gray-400 font-light">Step inside VERO and witness the elegance of our dining spaces and culinary craftsmanship.</p>
+            </div>
+
+            <!-- Masonry Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" data-aos="fade-up">
+                <a href="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" data-lightbox="gallery" data-title="VERO Interior Dining Hall" class="group relative rounded-xl overflow-hidden h-72 block">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Gallery 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-vero-primary text-2xl"></i>
+                    </div>
+                </a>
+                <a href="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80" data-lightbox="gallery" data-title="Signature Mixed Grills" class="group relative rounded-xl overflow-hidden h-72 block">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Gallery 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-vero-primary text-2xl"></i>
+                    </div>
+                </a>
+                <a href="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" data-lightbox="gallery" data-title="Black Angus Ribeye Steak" class="group relative rounded-xl overflow-hidden h-72 block">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Gallery 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-vero-primary text-2xl"></i>
+                    </div>
+                </a>
+                <a href="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=1200&q=80" data-lightbox="gallery" data-title="Neapolitan Margherita Pizza" class="group relative rounded-xl overflow-hidden h-72 block">
+                    <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=80" alt="Gallery 4" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-vero-primary text-2xl"></i>
+                    </div>
+                </a>
+                <a href="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=1200&q=80" data-lightbox="gallery" data-title="Jumbo Grilled Shrimp" class="group relative rounded-xl overflow-hidden h-72 block">
+                    <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80" alt="Gallery 5" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-vero-primary text-2xl"></i>
+                    </div>
+                </a>
+                <a href="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1200&q=80" data-lightbox="gallery" data-title="Molten Chocolate Lava Cake" class="group relative rounded-xl overflow-hidden h-72 block">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80" alt="Gallery 6" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-vero-primary text-2xl"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chef Section -->
+    <section id="chef" class="py-24 bg-vero-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <span class="text-vero-primary uppercase tracking-[0.3em] text-xs font-semibold mb-3 block">Mastermind</span>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6">Meet Our Executive Chef</h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed font-light">
+                        Chef Marco Bellini brings over 20 years of Michelin-starred culinary expertise from Milan and Paris to VERO. His dedication to fresh, premium ingredients and innovative flavor combinations elevates every dish into an unforgettable work of art.
+                    </p>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-vero-primary/10 border border-vero-primary/30 flex items-center justify-center text-vero-primary">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm">International Culinary Awards</h4>
+                                <p class="text-xs text-gray-400">Winner of Best Mediterranean Chef 2024</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-vero-primary/10 border border-vero-primary/30 flex items-center justify-center text-vero-primary">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm">Signature Creations</h4>
+                                <p class="text-xs text-gray-400">Pistachio San Sebastian & Truffle Ribeye</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-left" data-aos-duration="1000" class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-l from-vero-primary/20 to-transparent rounded-3xl blur-xl"></div>
+                    <div class="relative rounded-2xl overflow-hidden border border-vero-border glass-card">
+                        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1000&q=80" alt="Executive Chef Marco Bellini" class="w-full h-[450px] object-cover hover:scale-105 transition duration-700">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-[#0F0F0F] relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-vero-primary uppercase tracking-[0.3em] text-xs font-semibold mb-3 block">Reviews</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Guest Testimonials</h2>
+                <p class="text-gray-400 font-light">Read what our esteemed patrons have to say about their dining experience at VERO.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-aos="fade-up">
+                <!-- Review 1 -->
+                <div class="glass-card p-8 rounded-2xl border border-vero-border flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic mb-6 font-light">"An absolute masterpiece of a restaurant! The Ribeye steak was cooked to perfection and the ambiance is truly world-class."</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-vero-border">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Guest" class="w-12 h-12 rounded-full object-cover border border-vero-primary/40">
+                        <div>
+                            <h4 class="font-semibold text-sm">Youssef El-Masry</h4>
+                            <p class="text-xs text-gray-400">Food Critic</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass-card p-8 rounded-2xl border border-vero-border flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic mb-6 font-light">"Celebrated our wedding anniversary here. The service was impeccable, and the Pistachio San Sebastian cheesecake is unforgettable!"</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-vero-border">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" alt="Guest" class="w-12 h-12 rounded-full object-cover border border-vero-primary/40">
+                        <div>
+                            <h4 class="font-semibold text-sm">Nourhan & Karim</h4>
+                            <p class="text-xs text-gray-400">Regular Diners</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-card p-8 rounded-2xl border border-vero-border flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic mb-6 font-light">"The best seafood platter in Egypt. High quality, stunning presentation, and wonderful atmosphere. Highly recommended!"</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-vero-border">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Guest" class="w-12 h-12 rounded-full object-cover border border-vero-primary/40">
+                        <div>
+                            <h4 class="font-semibold text-sm">Tarek Amin</h4>
+                            <p class="text-xs text-gray-400">Business Executive</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="py-24 bg-vero-dark relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-vero-primary uppercase tracking-[0.3em] text-xs font-semibold mb-3 block">Table Booking</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Reserve Your Table</h2>
+                <p class="text-gray-400 font-light">Secure your dining experience at VERO. Please fill out the form below.</p>
+            </div>
+
+            <form id="reservation-form" class="glass-card p-8 md:p-12 rounded-3xl border border-vero-border shadow-2xl relative" data-aos="fade-up">
+                <!-- Success Message Overlay -->
+                <div id="reservation-success" class="hidden absolute inset-0 bg-vero-card/95 backdrop-blur-xl rounded-3xl flex flex-col items-center justify-center text-center p-8 z-20">
+                    <div class="w-16 h-16 rounded-full bg-vero-primary text-black flex items-center justify-center text-3xl mb-4">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold mb-2">Reservation Confirmed!</h3>
+                    <p class="text-gray-300 text-sm max-w-md mb-6">Thank you for choosing VERO. We have received your request and sent a confirmation SMS and email.</p>
+                    <button type="button" id="reset-form-btn" class="px-6 py-2.5 rounded-full bg-vero-primary text-black font-semibold text-xs">Book Another Table</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Full Name *</label>
+                        <input type="text" id="res-name" required placeholder="Ahmed Mohamed" class="w-full bg-vero-dark border border-vero-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-vero-primary transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Phone Number *</label>
+                        <input type="tel" id="res-phone" required placeholder="+20 123 456 7890" class="w-full bg-vero-dark border border-vero-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-vero-primary transition">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Email Address *</label>
+                        <input type="email" id="res-email" required placeholder="ahmed@example.com" class="w-full bg-vero-dark border border-vero-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-vero-primary transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Number of Guests *</label>
+                        <select id="res-guests" required class="w-full bg-vero-dark border border-vero-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-vero-primary transition text-gray-300">
+                            <option value="1">1 Person</option>
+                            <option value="2" selected>2 Persons (Couple)</option>
+                            <option value="4">4 Persons (Family)</option>
+                            <option value="6">6 Persons</option>
+                            <option value="8+">8+ Persons (VIP Group)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Date *</label>
+                        <input type="date" id="res-date" required class="w-full bg-vero-dark border border-vero-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-vero-primary transition text-gray-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Time *</label>
+                        <select id="res-time" required class="w-full bg-vero-dark border border-vero-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-vero-primary transition text-gray-300">
+                            <option value="01:00 PM">01:00 PM - Lunch</option>
+                            <option value="03:00 PM">03:00 PM - Lunch</option>
+                            <option value="07:00 PM">07:00 PM - Dinner</option>
+                            <option value="09:00 PM">09:00 PM - Dinner</option>
+                            <option value="11:00 PM">11:00 PM - Late Dining</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Special Notes / Dietary Requirements</label>
+                    <textarea id="res-notes" rows="3" placeholder="Allergies, anniversary celebration, seating preferences..." class="w-full bg-vero-dark border border-vero-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-vero-primary transition"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-full bg-vero-primary text-black font-bold tracking-wider uppercase text-xs hover:bg-opacity-90 transition shadow-lg shadow-vero-primary/20">
+                    Confirm Reservation
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-[#0F0F0F] relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-vero-primary uppercase tracking-[0.3em] text-xs font-semibold mb-3 block">Reach Out</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Contact & Location</h2>
+                <p class="text-gray-400 font-light">We look forward to welcoming you at VERO.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Info Cards -->
+                <div class="space-y-6" data-aos="fade-right">
+                    <div class="glass-card p-6 rounded-2xl border border-vero-border flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-vero-primary/10 border border-vero-primary/30 flex items-center justify-center text-vero-primary text-lg flex-shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-lg mb-1">Location</h4>
+                            <p class="text-gray-400 text-sm">Nile Corniche, Zamalek, Cairo Governorate, Egypt</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl border border-vero-border flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-vero-primary/10 border border-vero-primary/30 flex items-center justify-center text-vero-primary text-lg flex-shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-lg mb-1">Phone Enquiries</h4>
+                            <p class="text-gray-400 text-sm">+20 2 2735 0000 / +20 100 123 4567</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl border border-vero-border flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-vero-primary/10 border border-vero-primary/30 flex items-center justify-center text-vero-primary text-lg flex-shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-lg mb-1">Email Us</h4>
+                            <p class="text-gray-400 text-sm">reservations@verorender.com / info@verorender.com</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl border border-vero-border flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-vero-primary/10 border border-vero-primary/30 flex items-center justify-center text-vero-primary text-lg flex-shrink-0">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-lg mb-1">Working Hours</h4>
+                            <p class="text-gray-400 text-sm">Sunday – Saturday: 12:00 PM – 01:00 AM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Map Embed -->
+                <div class="rounded-2xl overflow-hidden border border-vero-border h-[450px]" data-aos="fade-left">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.8824796347317!2d31.2223!3d30.0561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAzJzIyLjAiTiAzMcKwMTMnMjAuMyJF!5e0!3m2!1sen!2seg!4v1620000000000!5m2!1sen!2seg" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-vero-border pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <h3 class="text-3xl font-serif font-bold text-vero-primary tracking-widest">VERO</h3>
+                    <p class="text-gray-400 text-sm font-light">An extraordinary culinary journey uniting exquisite international gastronomy with unparalleled luxury and elegance.</p>
+                    <div class="flex items-center space-x-4 space-x-reverse text-vero-primary text-lg pt-2">
+                        <a href="#" class="w-10 h-10 rounded-full border border-vero-border flex items-center justify-center hover:bg-vero-primary hover:text-black transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-vero-border flex items-center justify-center hover:bg-vero-primary hover:text-black transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-vero-border flex items-center justify-center hover:bg-vero-primary hover:text-black transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-serif font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-vero-primary transition">Home</a></li>
+                        <li><a href="#about" class="hover:text-vero-primary transition">About VERO</a></li>
+                        <li><a href="#menu" class="hover:text-vero-primary transition">Explore Menu</a></li>
+                        <li><a href="#gallery" class="hover:text-vero-primary transition">Photo Gallery</a></li>
+                        <li><a href="#offers" class="hover:text-vero-primary transition">Special Offers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Opening Hours -->
+                <div>
+                    <h4 class="font-serif font-bold text-lg mb-6">Opening Hours</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li>Monday - Thursday: 12 PM - 12 AM</li>
+                        <li>Friday - Saturday: 12 PM - 1 AM</li>
+                        <li>Sunday: 12 PM - 12 AM</li>
+                        <li class="text-vero-primary font-semibold pt-2">Valet Parking Available</li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-serif font-bold text-lg mb-6">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4 font-light">Subscribe to receive exclusive invitations and seasonal menu updates.</p>
+                    <form class="flex flex-col gap-3" onsubmit="event.preventDefault(); alert('Thank you for subscribing to VERO luxury updates!');">
+                        <input type="email" placeholder="Your email address" required class="bg-vero-card border border-vero-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-vero-primary transition">
+                        <button type="submit" class="w-full py-3 rounded-xl bg-vero-primary text-black font-bold text-xs uppercase tracking-wider hover:bg-opacity-90 transition">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-vero-border pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+                <p>&copy; 2026 VERO Restaurant. All rights reserved.</p>
+                <p class="mt-4 sm:mt-0">Designed & Developed by <span class="text-vero-primary font-semibold">Eng. Yahya Nabil</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons (WhatsApp & Back To Top & Reservation) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <a href="https://wa.me/201001234567" target="_blank" class="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center text-2xl shadow-xl hover:scale-110 transition">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="#reservation" class="w-12 h-12 rounded-full bg-vero-primary text-black flex items-center justify-center text-lg shadow-xl hover:scale-110 transition" title="Quick Reserve">
+            <i class="fa-solid fa-calendar-days"></i>
+        </a>
+        <button id="back-to-top" class="w-12 h-12 rounded-full bg-vero-card border border-vero-border text-vero-primary flex items-center justify-center text-sm shadow-xl hover:bg-vero-primary hover:text-black transition opacity-0 pointer-events-none">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JS Libraries: AOS, Lightbox -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Loading Screen & Progress Bar
+        window.addEventListener('load', () => {
+            const loadingBar = document.getElementById('loading-bar');
+            loadingBar.style.width = '100%';
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => loadingScreen.style.display = 'none', 700);
+            }, 400);
+        });
+
+        // Scroll Progress & Navbar & Back to Top Button
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+
+            const navbar = document.getElementById('navbar');
+            if (winScroll > 50) {
+                navbar.classList.add('shadow-xl');
+            } else {
+                navbar.classList.remove('shadow-xl');
+            }
+
+            const backToTop = document.getElementById('back-to-top');
+            if (winScroll > 500) {
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        document.getElementById('back-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Custom Cursor
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            cursorRing.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+        }
+        themeToggle.addEventListener('click', toggleTheme);
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+
+        // Complete Menu Database (60+ items covering all categories with exact Egyptian pricing & Unsplash images)
+        const menuData = [
+            // Breakfast
+            { category: 'breakfast', name: 'Oriental Foul & Falafel Tray', desc: 'Authentic slow-cooked foul, crispy falafel, tahina, pickles, and freshly baked baladi bread.', price: '120 EGP', rating: '4.8', calories: '520 kcal', img: 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=800&q=80' },
+            { category: 'breakfast', name: 'Eggs Benedict with Smoked Salmon', desc: 'Poached eggs served over artisan sourdough with smoked salmon and rich hollandaise sauce.', price: '175 EGP', rating: '4.9', calories: '610 kcal', img: 'https://images.unsplash.com/photo-1608039829572-78524f79c4c7?auto=format&fit=crop&w=800&q=80' },
+            { category: 'breakfast', name: 'Classic Avocado Toast', desc: 'Smashed fresh avocado on toasted sourdough topped with cherry tomatoes, chia seeds, and microgreens.', price: '145 EGP', rating: '4.7', calories: '420 kcal', img: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80' },
+            { category: 'breakfast', name: 'Fluffy Pancakes with Maple Syrup', desc: 'Stack of golden buttermilk pancakes served with fresh berries, whipped butter, and pure maple syrup.', price: '130 EGP', rating: '4.8', calories: '580 kcal', img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80' },
+            { category: 'breakfast', name: 'Shakshuka Skillet', desc: 'Eggs poached in a spiced tomato, pepper, and onion sauce, served hot in a cast-iron skillet.', price: '110 EGP', rating: '4.6', calories: '450 kcal', img: 'https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=800&q=80' },
+            { category: 'breakfast', name: 'Egyptian Omelette & Cheese', desc: 'Farm-fresh eggs folded with melted cheese, bell peppers, and fresh herbs.', price: '95 EGP', rating: '4.5', calories: '380 kcal', img: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80' },
+
+            // Appetizers
+            { category: 'appetizers', name: 'Crispy Mozzarella Sticks', desc: 'Golden-fried mozzarella sticks served with a spicy homemade marinara dipping sauce.', price: '95 EGP', rating: '4.6', calories: '480 kcal', img: 'https://images.unsplash.com/photo-1531749668029-2db88e4276c7?auto=format&fit=crop&w=800&q=80' },
+            { category: 'appetizers', name: 'Loaded Nachos Supreme', desc: 'Tortilla chips topped with melted cheese, jalapeños, guacamole, sour cream, and pico de gallo.', price: '150 EGP', rating: '4.8', calories: '750 kcal', img: 'https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=800&q=80' },
+            { category: 'appetizers', name: 'Garlic Butter Shrimp', desc: 'Pan-seared tiger prawns tossed in garlic, butter, lemon juice, and fresh parsley.', price: '160 EGP', rating: '4.9', calories: '390 kcal', img: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=800&q=80' },
+            { category: 'appetizers', name: 'Fried Mac & Cheese Bites', desc: 'Crispy breaded macaroni and cheese balls served with warm cheddar dip.', price: '110 EGP', rating: '4.5', calories: '530 kcal', img: 'https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=800&q=80' },
+            { category: 'appetizers', name: 'Crispy Buffalo Wings', desc: 'Tender chicken wings glazed in spicy buffalo sauce, served with blue cheese dressing.', price: '130 EGP', rating: '4.8', calories: '620 kcal', img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80' },
+
+            // Salads
+            { category: 'salads', name: 'Classic Caesar Salad', desc: 'Crisp romaine lettuce, garlic croutons, aged Parmesan, and signature Caesar dressing.', price: '130 EGP', rating: '4.6', calories: '380 kcal', img: 'https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=800&q=80' },
+            { category: 'salads', name: 'Greek Village Salad', desc: 'Fresh cucumbers, vine tomatoes, Kalamata olives, red onion, and thick feta cheese block.', price: '120 EGP', rating: '4.7', calories: '310 kcal', img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80' },
+            { category: 'salads', name: 'Grilled Halloumi Salad', desc: 'Seared halloumi cheese over mixed greens, pomegranate seeds, walnuts, and balsamic glaze.', price: '165 EGP', rating: '4.8', calories: '440 kcal', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80' },
+            { category: 'salads', name: 'Quinoa & Roasted Veggie Bowl', desc: 'Nutritious organic quinoa, roasted sweet potatoes, avocado, spinach, and lemon vinaigrette.', price: '150 EGP', rating: '4.7', calories: '360 kcal', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80' },
+            { category: 'salads', name: 'Seared Salmon Sesame Salad', desc: 'Pan-seared salmon fillet over mixed greens, edamame, avocado, and toasted sesame dressing.', price: '210 EGP', rating: '4.9', calories: '490 kcal', img: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=800&q=80' },
+
+            // Pizza
+            { category: 'pizza', name: 'Neapolitan Margherita', desc: 'Artisanal sourdough crust, San Marzano tomato sauce, fresh mozzarella, and basil leaves.', price: '195 EGP', rating: '4.8', calories: '780 kcal', img: 'https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=80' },
+            { category: 'pizza', name: 'Pepperoni Feast Pizza', desc: 'Loaded with premium beef pepperoni, melted mozzarella, and signature herb tomato sauce.', price: '245 EGP', rating: '4.9', calories: '920 kcal', img: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80' },
+            { category: 'pizza', name: 'Quattro Formaggi', desc: 'A blend of Mozzarella, Gorgonzola, Parmesan, and Fontina cheeses on a crispy dough base.', price: '260 EGP', rating: '4.7', calories: '890 kcal', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80' },
+            { category: 'pizza', name: 'BBQ Chicken Ranch Pizza', desc: 'Grilled chicken breast, smoky BBQ sauce, sweet corn, mozzarella, and ranch drizzle.', price: '250 EGP', rating: '4.8', calories: '860 kcal', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80' },
+            { category: 'pizza', name: 'Truffle Mushroom Pizza', desc: 'Creamy white base, wild mushrooms, fresh mozzarella, truffle oil, and fresh arugula.', price: '320 EGP', rating: '4.9', calories: '810 kcal', img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80' },
+            { category: 'pizza', name: 'Spicy Hot Sicilian Pizza', desc: 'Spicy Italian sausage, hot peppers, black olives, red onions, and rich mozzarella.', price: '280 EGP', rating: '4.8', calories: '880 kcal', img: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80' },
+
+            // Pasta
+            { category: 'pasta', name: 'Fettuccine Alfredo with Chicken', desc: 'Fresh fettuccine ribbons tossed in a rich garlic cream sauce with grilled chicken breast.', price: '220 EGP', rating: '4.8', calories: '850 kcal', img: 'https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=800&q=80' },
+            { category: 'pasta', name: 'Penne Arrabbiata', desc: 'Penne pasta in a spicy tomato sauce cooked with garlic, chili flakes, and fresh parsley.', price: '185 EGP', rating: '4.6', calories: '620 kcal', img: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80' },
+            { category: 'pasta', name: 'Creamy Pesto Farfalle', desc: 'Bowtie pasta coated in house-made basil pesto cream sauce, topped with pine nuts.', price: '210 EGP', rating: '4.7', calories: '710 kcal', img: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80' },
+            // Burgers
+            { category: 'burgers', name: 'Classic Angus Cheeseburger', desc: '200g Black Angus beef patty, cheddar cheese, pickles, lettuce, and secret sauce on brioche.', price: '210 EGP', rating: '4.8', calories: '790 kcal', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80' },
+            { category: 'burgers', name: 'Mushroom Swiss Burger', desc: 'Juicy beef patty topped with sautéed wild mushrooms, melted Swiss cheese, and truffle mayo.', price: '240 EGP', rating: '4.7', calories: '830 kcal', img: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80' },
+            { category: 'burgers', name: 'Double Smash Bacon Burger', desc: 'Two thin smashed beef patties, smoked beef bacon, double cheddar, and caramelised onions.', price: '280 EGP', rating: '4.9', calories: '980 kcal', img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80' },
+            { category: 'burgers', name: 'Crispy Honey Mustard Chicken', desc: 'Golden fried chicken fillet, honey mustard slaw, melted cheese, and pickles on brioche.', price: '195 EGP', rating: '4.8', calories: '720 kcal', img: 'https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=800&q=80' },
+            { category: 'burgers', name: 'Spicy Jalapeño Smash Burger', desc: 'Smashed beef patty, spicy jalapeños, pepper jack cheese, and chipotle aioli.', price: '230 EGP', rating: '4.6', calories: '810 kcal', img: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80' },
+
+            // Grills
+            { category: 'grills', name: 'Mixed Grill Platter', desc: 'Selection of charcoal-grilled kofta, shish taook, and lamb chops served with oriental rice.', price: '580 EGP', rating: '4.9', calories: '1100 kcal', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80' },
+            { category: 'grills', name: 'Ribeye Steak (300g)', desc: 'Charcoal-grilled Black Angus ribeye served with rosemary garlic butter and mashed potatoes.', price: '550 EGP', rating: '4.9', calories: '950 kcal', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80' },
+            { category: 'grills', name: 'Grilled Shish Taook Skewers', desc: 'Tender marinated chicken skewers grilled over charcoal, served with garlic dip and fries.', price: '290 EGP', rating: '4.8', calories: '680 kcal', img: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=800&q=80' },
+            { category: 'grills', name: 'Charcoal Grilled Half Chicken', desc: 'Half chicken marinated in lemon and spices, grilled over charcoal with roasted vegetables.', price: '270 EGP', rating: '4.7', calories: '720 kcal', img: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=800&q=80' },
+            { category: 'grills', name: 'Flame-Grilled Lamb Chops', desc: 'Prime lamb chops seasoned with herbs and grilled to perfection, served with grilled vegetables.', price: '520 EGP', rating: '4.8', calories: '880 kcal', img: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=800&q=80' },
+
+            // Seafood
+            { category: 'seafood', name: 'Grilled Sea Bass Fillet', desc: 'Pan-seared Mediterranean sea bass served with lemon butter sauce and steamed asparagus.', price: '450 EGP', rating: '4.8', calories: '540 kcal', img: 'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?auto=format&fit=crop&w=800&q=80' },
+            { category: 'seafood', name: 'Jumbo Butterfly Grilled Shrimp', desc: 'Flame-grilled jumbo prawns brushed with lemon garlic herb sauce, served with seafood rice.', price: '650 EGP', rating: '4.9', calories: '480 kcal', img: 'https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80' },
+            { category: 'seafood', name: 'Crispy Fried Calamari Ring Platter', desc: 'Golden tender calamari rings served with house-made tartar sauce and lemon wedges.', price: '380 EGP', rating: '4.7', calories: '560 kcal', img: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=800&q=80' },
+            { category: 'seafood', name: 'Traditional Seafood Paella', desc: 'Spanish rice dish cooked with saffron, calamari, mussels, prawns, and red bell peppers.', price: '520 EGP', rating: '4.8', calories: '790 kcal', img: 'https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=800&q=80' },
+            // Desserts
+            { category: 'desserts', name: 'Molten Chocolate Lava Cake', desc: 'Warm chocolate cake with a molten center, served with artisanal vanilla bean ice cream.', price: '140 EGP', rating: '4.9', calories: '680 kcal', img: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80' },
+            { category: 'desserts', name: 'Classic New York Cheesecake', desc: 'Rich and creamy baked cheesecake on a graham cracker crust with strawberry compote.', price: '130 EGP', rating: '4.8', calories: '540 kcal', img: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=800&q=80' },
+            { category: 'desserts', name: 'Nutella Belgian Waffles', desc: 'Golden Belgian waffles topped with warm Nutella, banana slices, and crushed hazelnuts.', price: '120 EGP', rating: '4.7', calories: '720 kcal', img: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=800&q=80' },
+            { category: 'desserts', name: 'Tiramisu Tradizionale', desc: 'Espresso-soaked ladyfingers layered with creamy mascarpone cheese and cocoa powder.', price: '110 EGP', rating: '4.8', calories: '480 kcal', img: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=800&q=80' },
+
+            // Drinks
+            { category: 'drinks', name: 'Iced Spanish Latte', desc: 'Espresso combined with fresh milk and condensed milk served over ice.', price: '95 EGP', rating: '4.9', calories: '210 kcal', img: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=800&q=80' },
+            { category: 'drinks', name: 'Double Espresso', desc: 'Concentrated shot of rich, aromatic Arabica espresso.', price: '70 EGP', rating: '4.6', calories: '10 kcal', img: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=800&q=80' },
+            { category: 'drinks', name: 'Creamy Cappuccino', desc: 'Equal parts espresso, steamed milk, and thick velvety milk foam topped with cocoa.', price: '85 EGP', rating: '4.8', calories: '140 kcal', img: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=80' },
+            { category: 'drinks', name: 'Fresh Mango Smoothie', desc: 'Pure crushed Egyptian mango blended smoothly with ice and honey.', price: '95 EGP', rating: '4.9', calories: '220 kcal', img: 'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=80' },
+            { category: 'drinks', name: 'Mint Lemonade Breeze', desc: 'Freshly squeezed lemons blended with fresh mint leaves and crushed ice.', price: '75 EGP', rating: '4.8', calories: '130 kcal', img: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80' },
+            { category: 'drinks', name: 'Classic Cola / Zero (330ml Can)', desc: 'Ice-cold canned soda served with a glass of ice and a lemon wedge.', price: '45 EGP', rating: '4.5', calories: '140 kcal', img: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=800&q=80' }
+        ];
+
+        // Render Menu Function
+        function renderMenu(items) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-400">No dishes found matching your search.</div>`;
+                return;
+            }
+
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl overflow-hidden border border-vero-border group flex flex-col justify-between transition-all duration-300 hover:border-vero-primary/50 hover:shadow-2xl';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', (index % 3) * 100);
+
+                card.innerHTML = `
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${item.img}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-vero-primary border border-vero-primary/20">
+                            ${item.category.toUpperCase()}
+                        </div>
+                        <button class="favorite-btn absolute top-3 left-3 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center hover:text-vero-primary transition" title="Add to Favorites">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-serif font-bold text-lg text-white group-hover:text-vero-primary transition">${item.name}</h3>
+                                <span class="text-lg font-bold text-vero-primary">${item.price}</span>
+                            </div>
+                            <p class="text-gray-400 text-xs font-light mb-4 leading-relaxed">${item.desc}</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-vero-border text-xs text-gray-400">
+                            <span class="flex items-center gap-1 text-amber-400 font-semibold"><i class="fa-solid fa-star"></i> ${item.rating}</span>
+                            <span class="bg-vero-dark px-2.5 py-1 rounded-md border border-vero-border"><i class="fa-solid fa-fire text-orange-500"></i> ${item.calories}</span>
+                            <button class="cart-btn px-4 py-2 rounded-full bg-vero-primary text-black font-semibold hover:bg-opacity-90 transition">
+                                <i class="fa-solid fa-bag-shopping"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Re-bind favorite buttons
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const icon = btn.querySelector('i');
+                    if (icon.classList.contains('fa-regular')) {
+                        icon.classList.remove('fa-regular');
+                        icon.classList.add('fa-solid', 'text-red-500');
+                    } else {
+                        icon.classList.remove('fa-solid', 'text-red-500');
+                        icon.classList.add('fa-regular');
+                    }
+                });
+            });
+
+            // Bind cart buttons
+            document.querySelectorAll('.cart-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    alert('Item successfully added to your order cart!');
+                });
+            });
+        }
+
+        // Initial render
+        renderMenu(menuData);
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.cat-filter');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-vero-primary', 'text-black', 'font-semibold');
+                    b.classList.add('bg-vero-card', 'border', 'border-vero-border', 'text-gray-300');
+                });
+                btn.classList.remove('bg-vero-card', 'border', 'border-vero-border', 'text-gray-300');
+                btn.classList.add('bg-vero-primary', 'text-black', 'font-semibold');
+
+                const category = btn.getAttribute('data-category');
+                if (category === 'all') {
+                    renderMenu(menuData);
+                } else {
+                    const filtered = menuData.filter(item => item.category === category);
+                    renderMenu(filtered);
+                }
+            });
+        });
+
+        // Live Search functionality
+        const searchInput = document.getElementById('menu-search');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = menuData.filter(item => 
+                item.name.toLowerCase().includes(query) ||
+                item.desc.toLowerCase().includes(query) ||
+                item.category.toLowerCase().includes(query)
+            );
+            renderMenu(filtered);
+        });
+
+        // Reservation Form handling
+        const reservationForm = document.getElementById('reservation-form');
+        const reservationSuccess = document.getElementById('reservation-success');
+        const resetFormBtn = document.getElementById('reset-form-btn');
+
+        reservationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            reservationSuccess.classList.remove('hidden');
+        });
+
+        resetFormBtn.addEventListener('click', () => {
+            reservationForm.reset();
+            reservationSuccess.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
